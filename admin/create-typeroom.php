@@ -10,16 +10,20 @@ else{
 // Code for change password	
 if(isset($_POST['submit']))
 {
-$brand=$_POST['brand'];
-$id=$_GET['id'];
-$sql="update  tblbrands set BrandName=:brand where id=:id";
+$typeroom=$_POST['typeroom'];
+$sql="INSERT INTO  tbltyperooms(TyperoomName) VALUES(:typeroom)";
 $query = $dbh->prepare($sql);
-$query->bindParam(':brand',$brand,PDO::PARAM_STR);
-$query->bindParam(':id',$id,PDO::PARAM_STR);
+$query->bindParam(':typeroom',$typeroom,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
-
-$msg="Brand Update successfully";
+if($lastInsertId)
+{
+$msg="Typeroom Created successfully";
+}
+else 
+{
+$error="Something went wrong. Please try again";
+}
 
 }
 ?>
@@ -35,7 +39,7 @@ $msg="Brand Update successfully";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Hotel-QuangVinh | Cập Nhật Loại Phòng</title>
+	<title>Hotels- QuangVinh</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -85,42 +89,27 @@ $msg="Brand Update successfully";
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Cập Nhật Loại Phòng </h2>
+						<h2 class="page-title">Tạo Loại Phòng</h2>
 
 						<div class="row">
 							<div class="col-md-10">
 								<div class="panel panel-default">
-									<div class="panel-heading">Cập Nhật Loại Phòng</div>
+									<div class="panel-heading">Thêm Loại Phòng</div>
 									<div class="panel-body">
 										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
 										
 											
   	        	  <?php if($error){?><div class="errorWrap"><strong>Lỗi</strong>:<?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap"><strong>Thành Công</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-
-<?php	
-$id=$_GET['id'];
-$ret="select * from tblbrands where id=:id";
-$query= $dbh -> prepare($ret);
-$query->bindParam(':id',$id, PDO::PARAM_STR);
-$query-> execute();
-$results = $query -> fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query -> rowCount() > 0)
-{
-foreach($results as $result)
-{
-?>
-
 											<div class="form-group">
 												<label class="col-sm-4 control-label">Tên</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control" value="<?php echo htmlentities($result->BrandName);?>" name="brand" id="brand" required>
+													<input type="text" class="form-control" name="typeroom" id="typeroom" required>
 												</div>
 											</div>
 											<div class="hr-dashed"></div>
 											
-										<?php }} ?>
+										
 								
 											
 											<div class="form-group">

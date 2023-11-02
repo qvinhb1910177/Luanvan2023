@@ -98,7 +98,7 @@ else{
 									<?php 
 
 $status=1;
-									$sql = "SELECT tblusers.FullName,tblbrands.BrandName,tblvehicles.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id,tblbooking.BookingNumber  from tblbooking join tblvehicles on tblvehicles.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail join tblbrands on tblvehicles.VehiclesBrand=tblbrands.id   where tblbooking.Status=:status";
+									$sql = "SELECT tblusers.FullName,tbltyperooms.TyperoomName,tblrooms.RoomsTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.RoomId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id,tblbooking.BookingNumber  from tblbooking join tblrooms on tblrooms.id=tblbooking.RoomId join tblusers on tblusers.EmailId=tblbooking.userEmail join tbltyperooms on tblrooms.RoomsTyperoom=tbltyperooms.id   where tblbooking.Status=:status";
 $query = $dbh -> prepare($sql);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query->execute();
@@ -112,7 +112,7 @@ foreach($results as $result)
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($result->FullName);?></td>
 											<td><?php echo htmlentities($result->BookingNumber);?></td>
-											<td><a href="edit-vehicle.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></td>
+											<td><a href="edit-room.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->TyperoomName);?> , <?php echo htmlentities($result->RoomsTitle);?></td>
 											<td><?php echo htmlentities($result->FromDate);?></td>
 											<td><?php echo htmlentities($result->ToDate);?></td>
 											<td><?php 

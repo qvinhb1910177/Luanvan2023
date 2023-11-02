@@ -104,8 +104,8 @@ foreach($results as $result)
 
         <div class="profile_wrap">
           <h5 class="uppercase underline">My Testimonials </h5>
-          <div class="my_vehicles_list">
-            <ul class="vehicle_listing">
+          <div class="my_rooms_list">
+            <ul class="room_listing">
 <?php 
 $useremail=$_SESSION['login'];
 $sql = "SELECT * from tbltestimonial where UserEmail=:useremail";
@@ -126,12 +126,12 @@ foreach($results as $result)
                    <p><b>Posting Date:</b><?php echo htmlentities($result->PostingDate);?> </p>
                 </div>
                 <?php if($result->status==1){ ?>
-                 <div class="vehicle_status"> <a class="btn outline btn-xs active-btn">Active</a>
+                 <div class="room_status"> <a class="btn outline btn-xs active-btn">Active</a>
 
                   <div class="clearfix"></div>
                   </div>
                   <?php } else {?>
-               <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Waiting for approval</a>
+               <div class="room_status"> <a href="#" class="btn outline btn-xs">Waiting for approval</a>
                   <div class="clearfix"></div>
                   </div>
                   <?php } ?>
@@ -146,7 +146,7 @@ foreach($results as $result)
     </div>
   </div>
 </section>
-<!--/my-vehicles--> 
+<!--/my-rooms--> 
 
 <<!--Footer -->
 <?php include('includes/footer.php');?>

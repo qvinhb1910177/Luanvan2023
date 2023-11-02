@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @charset "utf-8";
 
 /*
@@ -33,7 +35,7 @@ Version:1.0
 		3.7. Trending-Cars
 		3.8 Testimonial-Section
 		3.9. Blog-Section
-		3.10. Popular-Brands
+		3.10. Popular-Typerooms
 		3.11. Login / Register / Forgot password
 		3.12. Footer
 		
@@ -72,8 +74,8 @@ Version:1.0
 		15.7. Blog-Tag
 	
 	16. Profile-page
-		16.1. Post-a-vehicle
-		16.2. my-vehicles
+		16.1. Post-a-room
+		16.2. my-rooms
 	
 	17. Dealer-profile
 	18. Dealers-list
@@ -90,7 +92,7 @@ Version:1.0
 ==========================*/
 
 body {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Roboto Slab', serif;
 	margin:0px;
 	padding:0px !important;
 	overflow-x:hidden;
@@ -324,7 +326,7 @@ a,
 .navbar-default .navbar-nav > .open > a, 
 .navbar-default .navbar-nav > .open > a:focus, 
 .navbar-default .navbar-nav > .open > a:hover,
-.my_vehicles_list ul.vehicle_listing li a:hover, 
+.my_rooms_list ul.room_listing li a:hover, 
 .dealer_contact_info a:hover, 
 .widget_heading i, 
 .dealers_listing .dealer_info h5 a:hover, 
@@ -1695,22 +1697,22 @@ nav.navbar {
 
 
 /*------------------------
-	3.10. Popular-Brands
+	3.10. Popular-Typerooms
 --------------------------------*/
-.brand-section {
+.typeroom-section {
   padding: 55px 0;
 }
-.brand-hadding {
+.typeroom-hadding {
   border-right: 1px solid #bbbbbb;
   float: left;
   padding-right: 10px;
   position: relative;
   width: 90px;
 }
-#popular_brands div {
+#popular_typerooms div {
 	padding:0 10px;
 }
-.brand-hadding::after {
+.typeroom-hadding::after {
   border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #bbbbbb;
   border-style: solid;
   border-width: 12px;
@@ -1724,21 +1726,21 @@ nav.navbar {
      -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
 }
-.brand-hadding h5 {
+.typeroom-hadding h5 {
   line-height: 26px;
   margin: 10px 0;
 }
-.brand-logo-list {
+.typeroom-logo-list {
   float: right;
   margin: 0 auto;
   padding: 0 0 0 30px;
   width: 90%;
 }
 
-.brand-logo-list a img {
+.typeroom-logo-list a img {
   margin: 0 auto;
 }
-.brand-logo-list .owl-controls.clickable {
+.typeroom-logo-list .owl-controls.clickable {
 	display:none !important;
 }
 
@@ -2696,17 +2698,17 @@ table.info-tabel tr td {
 .main_features ul li:last-child {
 	margin:0px;
 }
-.share_vehicle {
+.share_room {
 	background:#222222;
 	padding:22px 26px;
 	margin:0 auto 35px;	
 }
-.share_vehicle p, .share_vehicle a {
+.share_room p, .share_room a {
 	color:#fff;
 	font-size:20px;
 	margin:0px;
 }
-.share_vehicle a {
+.share_room a {
 	margin:0 4px;
 }
 .add_compare {
@@ -2806,7 +2808,7 @@ table.info-tabel tr td {
   padding: 80px 0;
   position: relative;
 }
-.listing_detail_header .share_vehicle {
+.listing_detail_header .share_room {
 	display:inline-block;
 	background:none;
 	padding:0px;
@@ -3722,9 +3724,9 @@ table.info-tabel tr td {
 
 
 /*--------------------------
-	16.1. Post-a-vehicle
+	16.1. Post-a-room
 -------------------------------*/
-.vehicle_accessories, .vehicle_type {
+.room_accessories, .room_type {
 	clear:both;
 	margin:0 auto 30px;
 	display:table;
@@ -3741,33 +3743,33 @@ table.info-tabel tr td {
 }
 
 }
-.vehicle_type .radio label::before {
+.room_type .radio label::before {
 	height:24px;
 	width:24px;
 	border:#000 solid 1px;
 }
-.vehicle_type .radio input[type="radio"]:checked + label::before {
+.room_type .radio input[type="radio"]:checked + label::before {
   font-size: 35px;
   line-height: 15px;
 }
-.vehicle_type .radio label {
+.room_type .radio label {
   font-size: 18px;
   font-weight: 700;
   padding-left: 34px;
   color:#111;
   line-height:32px;
 }
-.vehicle_images {
+.room_images {
 	display:table;
 	width:100%;
 }
-.vehicle_images > div {
+.room_images > div {
   float: left;
   height: 95px;
   margin: 0 10px 10px 0;
   width: 150px;
 }	
-.vehicle_images img {
+.room_images img {
 	max-width:100%;
 }
 .upload_more_img {
@@ -3804,50 +3806,50 @@ table.info-tabel tr td {
 
 
 /*--------------
-	16.2. my-vehicles
+	16.2. my-rooms
 -------------------------*/
 
-.my_vehicles_list ul.vehicle_listing {
+.my_rooms_list ul.room_listing {
 	padding:0px;
 	margin:0 0 50px;
 }
-.my_vehicles_list ul.vehicle_listing li {
+.my_rooms_list ul.room_listing li {
 	list-style:none;
 	border-bottom:#e6e6e6 solid 1px;
 	padding:14px 0 22px;
 	overflow:hidden;
 	position:relative;
 }
-.vehicle_img {
+.room_img {
   float: left;
   margin-right: 22px;
   width: 22%;
 }
-.vehicle_img img {
+.room_img img {
 	max-width:100%;
 }
-.my_vehicles_list ul.vehicle_listing li a {
+.my_rooms_list ul.room_listing li a {
 	color:#111;
 }
-.vehicle_title {
+.room_title {
   float: left;
   padding: 12px 0;
   width: 40%;
 }
-.vehicle_status {
+.room_status {
   float: right;
   text-align: right;
   width: 25%;
 }
-.vehicle_status a i {
+.room_status a i {
 	margin:10px 0 0 8px;
 	color:#555;
 	font-size:18px
 }
-.deactive_vehicle {
+.deactive_room {
   opacity: 0.3;
 }
-.deactive_vehicle:after {
+.deactive_room:after {
 	position:absolute;
 	bottom:0px;
 	left:0px;
@@ -3856,7 +3858,7 @@ table.info-tabel tr td {
 	content:"";
 	border-bottom:#909090 solid 1px;
 }
-.my_vehicles_list ul.vehicle_listing li .btn:hover {
+.my_rooms_list ul.room_listing li .btn:hover {
 	color:#fff;
 }
 
@@ -4321,10 +4323,10 @@ h3 {
   line-height: 25px;
   width: 25px;
 }
-.brand-section {
+.typeroom-section {
   padding: 15px 0 35px;
 }
-.brand-hadding {
+.typeroom-hadding {
   border-bottom:1px solid #bbbbbb;
   border-right:0px;
   float: none;
@@ -4332,10 +4334,10 @@ h3 {
   padding: 0;
   width: 100%;
 }
-.brand-hadding:after {
+.typeroom-hadding:after {
 	display:none;
 }
-.brand-logo-list {
+.typeroom-logo-list {
   float: none;
   margin: 0 auto;
   padding: 0;
@@ -4882,14 +4884,14 @@ h3 {
 	float:none;
 	width:100%;
 }
-.vehicle_img {
+.room_img {
   width: 40%;
   margin-right:5%;
 }
-.vehicle_title {
+.room_title {
   width: 55%;
 }
-.vehicle_status {
+.room_status {
   clear: both;
   float: none;
   padding-top: 15px;
@@ -4997,7 +4999,7 @@ h3 {
 .section-header h2 {
   margin-bottom: 30px;
 }
-.brand-logo-list {
+.typeroom-logo-list {
   width: 86%;
 }
 .footer-bottom div {
@@ -5411,7 +5413,7 @@ h5 {
   min-width: 108px;
   padding: 10px;
 }
-.share_vehicle {
+.share_room {
   padding: 20px 15px;
 }
 .widget_heading i {

@@ -11,11 +11,11 @@ else{
 if(isset($_REQUEST['del']))
 	{
 $delid=intval($_GET['del']);
-$sql = "delete from tblvehicles  WHERE  id=:delid";
+$sql = "delete from tblrooms  WHERE  id=:delid";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':delid',$delid, PDO::PARAM_STR);
 $query -> execute();
-$msg="Vehicle  record deleted successfully";
+$msg="Room  record deleted successfully";
 }
 
 
@@ -105,18 +105,18 @@ $msg="Vehicle  record deleted successfully";
 									<!-- <tfoot>
 										<tr>
 										<th>#</th>
-										<th>Vehicle Title</th>
-											<th>Brand </th>
-											<th>Price Per day</th>
-											<th>Fuel Type</th>
-											<th>Model Year</th>
+										<th>Room Title</th>
+											<th>Typeroom </th>
+											<th>Price Ngày</th>
+											<th>Color Type</th>
+											<th>number bed</th>
 											<th>Action</th>
 										</tr>
 										</tr>
 									</tfoot> -->
 									<tbody>
 
-<?php $sql = "SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand";
+<?php $sql = "SELECT tblrooms.RoomsTitle,tbltyperooms.TyperoomName,tblrooms.PricePerDay,tblrooms.ColorType,tblrooms.NumberBed,tblrooms.id from tblrooms join tbltyperooms on tbltyperooms.id=tblrooms.RoomsTyperoom";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -127,13 +127,13 @@ foreach($results as $result)
 {				?>	
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->VehiclesTitle);?></td>
-											<td><?php echo htmlentities($result->BrandName);?></td>
+											<td><?php echo htmlentities($result->RoomsTitle);?></td>
+											<td><?php echo htmlentities($result->TyperoomName);?></td>
 											<td><?php echo htmlentities($result->PricePerDay);?></td>
-											<td><?php echo htmlentities($result->FuelType);?></td>
-												<td><?php echo htmlentities($result->ModelYear);?></td>
-		<td><a href="edit-vehicle.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-<a href="manage-vehicles.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+											<td><?php echo htmlentities($result->ColorType);?></td>
+												<td><?php echo htmlentities($result->NumberBed);?></td>
+		<td><a href="edit-room.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+<a href="manage-rooms.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 										

@@ -78,17 +78,17 @@ $regusers=$query->rowCount();
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
 												<?php 
-$sql1 ="SELECT id from tblvehicles ";
+$sql1 ="SELECT id from tblrooms ";
 $query1 = $dbh -> prepare($sql1);;
 $query1->execute();
 $results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$totalvehicle=$query1->rowCount();
+$totalroom=$query1->rowCount();
 ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($totalvehicle);?></div>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($totalroom);?></div>
 													<div class="stat-panel-title text-uppercase">Phòng</div>
 												</div>
 											</div>
-											<a href="manage-vehicles.php" class="block-anchor panel-footer text-center">Chi Tiết &nbsp; <i class="fa fa-arrow-right"></i></a>
+											<a href="manage-rooms.php" class="block-anchor panel-footer text-center">Chi Tiết &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
 									<div class="col-md-3">
@@ -115,17 +115,17 @@ $bookings=$query2->rowCount();
 											<div class="panel-body bk-warning text-light">
 												<div class="stat-panel text-center">
 <?php 
-$sql3 ="SELECT id from tblbrands ";
+$sql3 ="SELECT id from tbltyperooms ";
 $query3= $dbh -> prepare($sql3);
 $query3->execute();
 $results3=$query3->fetchAll(PDO::FETCH_OBJ);
-$brands=$query3->rowCount();
+$typerooms=$query3->rowCount();
 ?>												
-													<div class="stat-panel-number h1 "><?php echo htmlentities($brands);?></div>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($typerooms);?></div>
 													<div class="stat-panel-title text-uppercase">Loại Phòng</div>
 												</div>
 											</div>
-											<a href="manage-brands.php" class="block-anchor panel-footer text-center">Chi Tiết &nbsp; <i class="fa fa-arrow-right"></i></a>
+											<a href="manage-typerooms.php" class="block-anchor panel-footer text-center">Chi Tiết &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
 								</div>

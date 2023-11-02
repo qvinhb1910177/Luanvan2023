@@ -60,9 +60,9 @@ $(function(e) {
 
 
 /*------------------------------------------------------------------
-	Popular Brands
+	Popular Typerooms
 	-------------------------------------------------------------------*/
-	var owl = $("#popular_brands");
+	var owl = $("#popular_typerooms");
 	owl.owlCarousel({
 	  itemsCustom : [
 		[0, 2],

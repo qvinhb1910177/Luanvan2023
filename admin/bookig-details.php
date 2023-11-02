@@ -114,9 +114,9 @@ echo "<script type='text/javascript'> document.location = 'confirmed-bookings.ph
 
 									<?php 
 $bid=intval($_GET['bid']);
-									$sql = "SELECT tblusers.*,tblbrands.BrandName,tblvehicles.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id,tblbooking.BookingNumber,
-DATEDIFF(tblbooking.ToDate,tblbooking.FromDate) as totalnodays,tblvehicles.PricePerDay
-									  from tblbooking join tblvehicles on tblvehicles.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail join tblbrands on tblvehicles.VehiclesBrand=tblbrands.id where tblbooking.id=:bid";
+									$sql = "SELECT tblusers.*,tbltyperooms.TyperoomName,tblrooms.RoomsTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.RoomId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id,tblbooking.BookingNumber,
+DATEDIFF(tblbooking.ToDate,tblbooking.FromDate) as totalnodays,tblrooms.PricePerDay
+									  from tblbooking join tblrooms on tblrooms.id=tblbooking.RoomId join tblusers on tblusers.EmailId=tblbooking.userEmail join tbltyperooms on tblrooms.RoomsTyperoom=tbltyperooms.id where tblbooking.id=:bid";
 $query = $dbh -> prepare($sql);
 $query -> bindParam(':bid',$bid, PDO::PARAM_STR);
 $query->execute();
@@ -158,8 +158,8 @@ foreach($results as $result)
 											<th colspan="4" style="text-align:center;color:blue">Booking Details</th>
 										</tr>
 											<tr>											
-											<th>Vehicle Name</th>
-											<td><a href="edit-vehicle.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></td>
+											<th>Room Name</th>
+											<td><a href="edit-room.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->TyperoomName);?> , <?php echo htmlentities($result->RoomsTitle);?></td>
 											<th>Booking Date</th>
 											<td><?php echo htmlentities($result->PostingDate);?></td>
 										</tr>
@@ -172,7 +172,7 @@ foreach($results as $result)
 <tr>
 	<th>Total Days</th>
 	<td><?php echo htmlentities($tdays=$result->totalnodays);?></td>
-	<th>Rent Per Days</th>
+	<th>Rent Ngàys</th>
 	<td><?php echo htmlentities($ppdays=$result->PricePerDay);?></td>
 </tr>
 <tr>

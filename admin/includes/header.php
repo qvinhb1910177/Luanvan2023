@@ -1,4 +1,4 @@
-<div class="brand clearfix">
+<div class="typeroom clearfix">
 	<a href="dashboard.php" style="font-size: 25px;">HOTEL-QUANGVINH | ADMIN</a>  
 		<span class="menu-btn"><i class="fa fa-bars"></i></span>
 		<ul class="ts-profile-nav">

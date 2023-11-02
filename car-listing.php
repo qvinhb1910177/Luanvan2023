@@ -77,7 +77,7 @@ error_reporting(0);
           <div class="sorting-count">
 <?php 
 //Query for Listing count
-$sql = "SELECT id from tblvehicles";
+$sql = "SELECT id from tblrooms";
 $query = $dbh -> prepare($sql);
 /* $query->bindParam(':vhid',$vhid, PDO::PARAM_STR); */
 $query->execute();
@@ -88,7 +88,7 @@ $cnt=$query->rowCount();
 </div>
 </div>
 
-<?php $sql = "SELECT tblvehicles.*,tblbrands.BrandName,tblbrands.id as bid  from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand";
+<?php $sql = "SELECT tblrooms.*,tbltyperooms.TyperoomName,tbltyperooms.id as bid  from tblrooms join tbltyperooms on tbltyperooms.id=tblrooms.RoomsTyperoom";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -98,17 +98,17 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 {  ?>
         <div class="product-listing-m gray-bg">
-          <div class="product-listing-img"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="Image" /> </a> 
+          <div class="product-listing-img"><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="Image" /> </a> 
           </div>
           <div class="product-listing-content">
-            <h5><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h5>
+            <h5><a href="room-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->TyperoomName);?> , <?php echo htmlentities($result->RoomsTitle);?></a></h5>
             <p class="list-price">VND<?php echo htmlentities($result->PricePerDay);?> /Ngày</p>
             <ul>
-              <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> số giường</li>
-              <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> loại phòng</li>
-              <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
+              <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->NumberPeople);?> số giường</li>
+              <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->NumberBed);?> màu sắc</li>
+              <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->ColorType);?></li>
             </ul>
-            <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn">Xem chi tiết<span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+            <a href="room-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn">Xem chi tiết<span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
           </div>
         </div>
       <?php }} ?>
@@ -123,10 +123,10 @@ foreach($results as $result)
           <div class="sidebar_filter">
             <form action="search-carresult.php" method="post">
               <div class="form-group select">
-                <select class="form-control" name="brand">
+                <select class="form-control" name="typeroom">
                   <option>Chọn loại phòng</option>
 
-                  <?php $sql = "SELECT * from  tblbrands ";
+                  <?php $sql = "SELECT * from  tbltyperooms ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -135,17 +135,17 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {       ?>  
-<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?></option>
+<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->TyperoomName);?></option>
 <?php }} ?>
                  
                 </select>
               </div>
               <div class="form-group select">
-                <select class="form-control" name="fueltype">
-                  <option>Select Fuel Type</option>
-<option value="Petrol">Petrol</option>
-<option value="Diesel">Diesel</option>
-<option value="CNG">CNG</option>
+                <select class="form-control" name="colortype">
+                  <option>Màu Sắc</option>
+<option value="Tươi Sáng">Tươi Sáng</option>
+<option value="Trung tính">Trung tính</option>
+<option value="Tối">Tối</option>
                 </select>
               </div>
              
@@ -162,7 +162,7 @@ foreach($results as $result)
           </div>
           <div class="recent_addedcars">
             <ul>
-<?php $sql = "SELECT tblvehicles.*,tblbrands.BrandName,tblbrands.id as bid  from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand order by id desc limit 4";
+<?php $sql = "SELECT tblrooms.*,tbltyperooms.TyperoomName,tbltyperooms.id as bid  from tblrooms join tbltyperooms on tbltyperooms.id=tblrooms.RoomsTyperoom order by id desc limit 4";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -173,8 +173,8 @@ foreach($results as $result)
 {  ?>
 
               <li class="gray-bg">
-                <div class="recent_post_img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" alt="image"></a> </div>
-                <div class="recent_post_title"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a>
+                <div class="recent_post_img"> <a href="room-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage1);?>" alt="image"></a> </div>
+                <div class="recent_post_title"> <a href="room-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->TyperoomName);?> , <?php echo htmlentities($result->RoomsTitle);?></a>
                   <p class="widget_price">$<?php echo htmlentities($result->PricePerDay);?> /Ngày</p>
                 </div>
               </li>

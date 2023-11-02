@@ -11,7 +11,7 @@ $useremail=$_SESSION['login'];
 $status=0;
 $vhid=$_GET['vhid'];
 $bookingno=mt_rand(100000000, 999999999);
-$ret="SELECT * FROM tblbooking where (:fromdate BETWEEN date(FromDate) and date(ToDate) || :todate BETWEEN date(FromDate) and date(ToDate) || date(FromDate) BETWEEN :fromdate and :todate) and VehicleId=:vhid";
+$ret="SELECT * FROM tblbooking where (:fromdate BETWEEN date(FromDate) and date(ToDate) || :todate BETWEEN date(FromDate) and date(ToDate) || date(FromDate) BETWEEN :fromdate and :todate) and RoomId=:vhid";
 $query1 = $dbh -> prepare($ret);
 $query1->bindParam(':vhid',$vhid, PDO::PARAM_STR);
 $query1->bindParam(':fromdate',$fromdate,PDO::PARAM_STR);
@@ -22,7 +22,7 @@ $results1=$query1->fetchAll(PDO::FETCH_OBJ);
 if($query1->rowCount()==0)
 {
 
-$sql="INSERT INTO  tblbooking(userEmail,VehicleId,FromDate,ToDate,message,Status) VALUES(:useremail,:vhid,:fromdate,:todate,:message,:status)";
+$sql="INSERT INTO  tblbooking(userEmail,RoomId,FromDate,ToDate,message,Status) VALUES(:useremail,:vhid,:fromdate,:todate,:message,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
 $query->bindParam(':vhid',$vhid,PDO::PARAM_STR);
@@ -55,7 +55,7 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <html lang="en">
 <head>
 
-<title>Car Rental | Vehicle Details</title>
+<title>Car Rental | Room Details</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custome Style -->
@@ -99,7 +99,7 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 
 <?php 
 $vhid=intval($_GET['vhid']);
-$sql = "SELECT tblvehicles.*,tblbrands.BrandName,tblbrands.id as bid  from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand where tblvehicles.id=:vhid";
+$sql = "SELECT tblrooms.*,tbltyperooms.TyperoomName,tbltyperooms.id as bid  from tblrooms join tbltyperooms on tbltyperooms.id=tblrooms.RoomsTyperoom where tblrooms.id=:vhid";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':vhid',$vhid, PDO::PARAM_STR);
 $query->execute();
@@ -113,16 +113,16 @@ $_SESSION['brndid']=$result->bid;
 ?>  
 
 <section id="listing_img_slider">
-  <div><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image" width="900" height="560"></div>
-  <div><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage2);?>" class="img-responsive" alt="image" width="900" height="560"></div>
-  <div><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage3);?>" class="img-responsive" alt="image" width="900" height="560"></div>
-  <div><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage4);?>" class="img-responsive"  alt="image" width="900" height="560"></div>
+  <div><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image" width="900" height="560"></div>
+  <div><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage2);?>" class="img-responsive" alt="image" width="900" height="560"></div>
+  <div><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage3);?>" class="img-responsive" alt="image" width="900" height="560"></div>
+  <div><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage4);?>" class="img-responsive"  alt="image" width="900" height="560"></div>
   <?php if($result->Vimage5=="")
 {
 
 } else {
   ?>
-  <div><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage5);?>" class="img-responsive" alt="image" width="900" height="560"></div>
+  <div><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage5);?>" class="img-responsive" alt="image" width="900" height="560"></div>
   <?php } ?>
 </section>
 <!--/Listing-Image-Slider-->
@@ -133,11 +133,11 @@ $_SESSION['brndid']=$result->bid;
   <div class="container">
     <div class="listing_detail_head row">
       <div class="col-md-9">
-        <h2><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></h2>
+        <h2><?php echo htmlentities($result->TyperoomName);?> , <?php echo htmlentities($result->RoomsTitle);?></h2>
       </div>
       <div class="col-md-3">
         <div class="price_info">
-          <p>$<?php echo htmlentities($result->PricePerDay);?> </p>Per Day
+          <p>$<?php echo htmlentities($result->PricePerDay);?> </p>/Ngày
          
         </div>
       </div>
@@ -148,17 +148,17 @@ $_SESSION['brndid']=$result->bid;
           <ul>
           
             <li> <i class="fa fa-calendar" aria-hidden="true"></i>
-              <h5><?php echo htmlentities($result->ModelYear);?></h5>
-              <p>Reg.Year</p>
+              <h5><?php echo htmlentities($result->NumberBed);?></h5>
+              <p>Số Giường</p>
             </li>
             <li> <i class="fa fa-cogs" aria-hidden="true"></i>
-              <h5><?php echo htmlentities($result->FuelType);?></h5>
-              <p>Fuel Type</p>
+              <h5><?php echo htmlentities($result->ColorType);?></h5>
+              <p>Màu Sắc</p>
             </li>
        
             <li> <i class="fa fa-user-plus" aria-hidden="true"></i>
-              <h5><?php echo htmlentities($result->SeatingCapacity);?></h5>
-              <p>Seats</p>
+              <h5><?php echo htmlentities($result->NumberPeople);?></h5>
+              <p>Sức chứa </p>
             </li>
           </ul>
         </div>
@@ -166,17 +166,17 @@ $_SESSION['brndid']=$result->bid;
           <div class="listing_detail_wrap"> 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs gray-bg" role="tablist">
-              <li role="presentation" class="active"><a href="#vehicle-overview " aria-controls="vehicle-overview" role="tab" data-toggle="tab">Vehicle Overview </a></li>
+              <li role="presentation" class="active"><a href="#room-overview " aria-controls="room-overview" role="tab" data-toggle="tab">Room Overview </a></li>
           
               <li role="presentation"><a href="#accessories" aria-controls="accessories" role="tab" data-toggle="tab">Accessories</a></li>
             </ul>
             
             <!-- Tab panes -->
             <div class="tab-content"> 
-              <!-- vehicle-overview -->
-              <div role="tabpanel" class="tab-pane active" id="vehicle-overview">
+              <!-- room-overview -->
+              <div role="tabpanel" class="tab-pane active" id="room-overview">
                 
-                <p><?php echo htmlentities($result->VehiclesOverview);?></p>
+                <p><?php echo htmlentities($result->RoomsOverview);?></p>
               </div>
               
               
@@ -191,7 +191,7 @@ $_SESSION['brndid']=$result->bid;
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Air Conditioner</td>
+                      <td>Máy lạnh</td>
 <?php if($result->AirConditioner==1)
 {
 ?>
@@ -201,7 +201,7 @@ $_SESSION['brndid']=$result->bid;
    <?php } ?> </tr>
 
 <tr>
-<td>AntiLock Braking System</td>
+<td>Wifi Miễn Phí</td>
 <?php if($result->AntiLockBrakingSystem==1)
 {
 ?>
@@ -212,7 +212,7 @@ $_SESSION['brndid']=$result->bid;
                     </tr>
 
 <tr>
-<td>Power Steering</td>
+<td>Lò sưởi</td>
 <?php if($result->PowerSteering==1)
 {
 ?>
@@ -225,7 +225,7 @@ $_SESSION['brndid']=$result->bid;
 
 <tr>
 
-<td>Power Windows</td>
+<td>TV</td>
 
 <?php if($result->PowerWindows==1)
 {
@@ -237,7 +237,7 @@ $_SESSION['brndid']=$result->bid;
 </tr>
                    
  <tr>
-<td>CD Player</td>
+<td>Tủ lạnh</td>
 <?php if($result->CDPlayer==1)
 {
 ?>
@@ -248,7 +248,7 @@ $_SESSION['brndid']=$result->bid;
 </tr>
 
 <tr>
-<td>Leather Seats</td>
+<td>Tủ an toàn</td>
 <?php if($result->LeatherSeats==1)
 {
 ?>
@@ -259,7 +259,7 @@ $_SESSION['brndid']=$result->bid;
 </tr>
 
 <tr>
-<td>Central Locking</td>
+<td>Dịch vụ phòng hàng ngày</td>
 <?php if($result->CentralLocking==1)
 {
 ?>
@@ -270,7 +270,7 @@ $_SESSION['brndid']=$result->bid;
 </tr>
 
 <tr>
-<td>Power Door Locks</td>
+<td>Máy Quạt</td>
 <?php if($result->PowerDoorLocks==1)
 {
 ?>
@@ -280,7 +280,7 @@ $_SESSION['brndid']=$result->bid;
 <?php } ?>
                     </tr>
                     <tr>
-<td>Brake Assist</td>
+<td>Bể bơi</td>
 <?php if($result->BrakeAssist==1)
 {
 ?>
@@ -291,7 +291,7 @@ $_SESSION['brndid']=$result->bid;
 </tr>
 
 <tr>
-<td>Driver Airbag</td>
+<td>Cà Phê Miễn Phí</td>
 <?php if($result->DriverAirbag==1)
 {
 ?>
@@ -302,7 +302,7 @@ $_SESSION['brndid']=$result->bid;
  </tr>
  
  <tr>
- <td>Passenger Airbag</td>
+ <td>Nhà hàng và quầy bar</td>
  <?php if($result->PassengerAirbag==1)
 {
 ?>
@@ -313,7 +313,7 @@ $_SESSION['brndid']=$result->bid;
 </tr>
 
 <tr>
-<td>Crash Sensor</td>
+<td>Phòng Gym</td>
 <?php if($result->CrashSensor==1)
 {
 ?>
@@ -337,7 +337,7 @@ $_SESSION['brndid']=$result->bid;
       <!--Side-Bar-->
       <aside class="col-md-3">
       
-        <div class="share_vehicle">
+        <div class="share_room">
           <p>Share: <a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a> </p>
         </div>
         <div class="sidebar_widget">
@@ -380,7 +380,7 @@ $_SESSION['brndid']=$result->bid;
       <div class="row">
 <?php 
 $bid=$_SESSION['brndid'];
-$sql="SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id,tblvehicles.SeatingCapacity,tblvehicles.VehiclesOverview,tblvehicles.Vimage1 from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand where tblvehicles.VehiclesBrand=:bid";
+$sql="SELECT tblrooms.RoomsTitle,tbltyperooms.TyperoomName,tblrooms.PricePerDay,tblrooms.ColorType,tblrooms.NumberBed,tblrooms.id,tblrooms.NumberPeople,tblrooms.RoomsOverview,tblrooms.Vimage1 from tblrooms join tbltyperooms on tbltyperooms.id=tblrooms.RoomsTyperoom where tblrooms.RoomsTyperoom=:bid";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':bid',$bid, PDO::PARAM_STR);
 $query->execute();
@@ -392,17 +392,17 @@ foreach($results as $result)
 { ?>      
         <div class="col-md-3 grid_listing">
           <div class="product-listing-m gray-bg">
-            <div class="product-listing-img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image" /> </a>
+            <div class="product-listing-img"> <a href="room-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/roomimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image" /> </a>
             </div>
             <div class="product-listing-content">
-              <h5><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h5>
+              <h5><a href="room-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->TyperoomName);?> , <?php echo htmlentities($result->RoomsTitle);?></a></h5>
               <p class="list-price">$<?php echo htmlentities($result->PricePerDay);?></p>
           
               <ul class="features_list">
                 
-             <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> seats</li>
-                <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> model</li>
-                <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
+             <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->NumberPeople);?> seats</li>
+                <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->NumberBed);?> model</li>
+                <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->ColorType);?></li>
               </ul>
             </div>
           </div>

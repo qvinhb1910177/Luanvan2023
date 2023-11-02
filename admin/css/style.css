@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,100italic,300italic,400italic);
 @import url(https://fonts.googleapis.com/css?family=Oswald:700,400,300);
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap);
 /****************************
 *   FOR RESPONSIVENESS      *
 ****************************/
@@ -36,6 +37,7 @@ html {
 *      BODY DEFAULTS        *
 ****************************/
 body {
+  font-family: 'Montserrat', sans-serif !important;
   font-size: 1em;
 }
 a {
@@ -58,11 +60,11 @@ a:hover {
 .btn.text-left {
   text-align: left;
 }
-.btn-brand {
+.btn-typeroom {
   background: #37a6c4;
   color: #fff;
 }
-.btn-brand:hover {
+.btn-typeroom:hover {
   color: #fff;
   background: #2c849c;
 }
@@ -112,7 +114,7 @@ a:hover {
 .bk-light {
   background: #fff;
 }
-.bk-brand {
+.bk-typeroom {
   background: #37a6c4;
 }
 .bk-dark {
@@ -211,7 +213,7 @@ a:hover {
 .text-dgrey {
   color: #818181;
 }
-.text-brand {
+.text-typeroom {
   color: #37a6c4;
 }
 .text-yellow {
@@ -544,7 +546,7 @@ li {
   margin-bottom: 20px;
   border-bottom: 1px solid #f0f0f0;
 }
-.brand {
+.typeroom {
   background: #3e454c;
   position: relative;
   z-index: 3;
@@ -552,7 +554,7 @@ li {
   width: 100%;
   top: 0;
 }
-.brand .logo {
+.typeroom .logo {
   box-sizing: border-box;
   padding: 20px;
   float: left;
@@ -560,14 +562,14 @@ li {
   width: 200px;
 }
 @media only screen and (min-width: 992px) {
-  .brand .logo {
+  .typeroom .logo {
     width: 250px;
   }
 }
-.brand .logo img {
+.typeroom .logo img {
   height: 20px;
 }
-.brand .menu-btn {
+.typeroom .menu-btn {
   float: right;
   background: #232d3b;
   text-align: center;
@@ -576,56 +578,56 @@ li {
   padding: 20px 20px;
 }
 @media only screen and (min-width: 992px) {
-  .brand .menu-btn {
+  .typeroom .menu-btn {
     display: none;
   }
 }
-.brand .ts-profile-nav {
+.typeroom .ts-profile-nav {
   float: right;
   display: none;
 }
-.brand .ts-profile-nav li {
+.typeroom .ts-profile-nav li {
   float: left;
   position: relative;
 }
-.brand .ts-profile-nav li a {
+.typeroom .ts-profile-nav li a {
   display: block;
   padding: 20px;
   color: #fff;
 }
-.brand .ts-profile-nav li ul {
+.typeroom .ts-profile-nav li ul {
   visibility: hidden;
   opacity: 0;
   right: 0;
   position: absolute;
 }
-.brand .ts-profile-nav li ul li {
+.typeroom .ts-profile-nav li ul li {
   float: none;
   width: 180px;
 }
-.brand .ts-profile-nav li ul li a {
+.typeroom .ts-profile-nav li ul li a {
   padding: 10px 20px;
   background: #222;
 }
-.brand .ts-profile-nav .ts-account .fa-angle-down {
+.typeroom .ts-profile-nav .ts-account .fa-angle-down {
   float: right;
 }
-.brand .ts-profile-nav .ts-account > a {
+.typeroom .ts-profile-nav .ts-account > a {
   width: 180px;
   background: #2c3136;
 }
-.brand .ts-profile-nav .ts-account .ts-avatar {
+.typeroom .ts-profile-nav .ts-account .ts-avatar {
   border-radius: 50%;
   height: 28px;
   margin: -10px 0;
   margin-right: 10px;
 }
-.brand .ts-profile-nav .ts-account:hover ul {
+.typeroom .ts-profile-nav .ts-account:hover ul {
   visibility: visible;
   opacity: 1;
 }
 @media only screen and (min-width: 992px) {
-  .brand .ts-profile-nav {
+  .typeroom .ts-profile-nav {
     display: block;
   }
 }

@@ -10,13 +10,13 @@ else{
 
 if(isset($_POST['submit']))
   {
-$vehicletitle=$_POST['vehicletitle'];
-$brand=$_POST['brandname'];
-$vehicleoverview=$_POST['vehicalorcview'];
+$roomtitle=$_POST['roomtitle'];
+$typeroom=$_POST['typeroomname'];
+$roomoverview=$_POST['roomorcview'];
 $priceperday=$_POST['priceperday'];
-$fueltype=$_POST['fueltype'];
-$modelyear=$_POST['modelyear'];
-$seatingcapacity=$_POST['seatingcapacity'];
+$colortype=$_POST['colortype'];
+$numberbed=$_POST['numberbed'];
+$numberpeople=$_POST['numberpeople'];
 $vimage1=$_FILES["img1"]["name"];
 $vimage2=$_FILES["img2"]["name"];
 $vimage3=$_FILES["img3"]["name"];
@@ -34,21 +34,21 @@ $cdplayer=$_POST['cdplayer'];
 $centrallocking=$_POST['centrallocking'];
 $crashcensor=$_POST['crashcensor'];
 $leatherseats=$_POST['leatherseats'];
-move_uploaded_file($_FILES["img1"]["tmp_name"],"img/vehicleimages/".$_FILES["img1"]["name"]);
-move_uploaded_file($_FILES["img2"]["tmp_name"],"img/vehicleimages/".$_FILES["img2"]["name"]);
-move_uploaded_file($_FILES["img3"]["tmp_name"],"img/vehicleimages/".$_FILES["img3"]["name"]);
-move_uploaded_file($_FILES["img4"]["tmp_name"],"img/vehicleimages/".$_FILES["img4"]["name"]);
-move_uploaded_file($_FILES["img5"]["tmp_name"],"img/vehicleimages/".$_FILES["img5"]["name"]);
+move_uploaded_file($_FILES["img1"]["tmp_name"],"img/roomimages/".$_FILES["img1"]["name"]);
+move_uploaded_file($_FILES["img2"]["tmp_name"],"img/roomimages/".$_FILES["img2"]["name"]);
+move_uploaded_file($_FILES["img3"]["tmp_name"],"img/roomimages/".$_FILES["img3"]["name"]);
+move_uploaded_file($_FILES["img4"]["tmp_name"],"img/roomimages/".$_FILES["img4"]["name"]);
+move_uploaded_file($_FILES["img5"]["tmp_name"],"img/roomimages/".$_FILES["img5"]["name"]);
 
-$sql="INSERT INTO tblvehicles(VehiclesTitle,VehiclesBrand,VehiclesOverview,PricePerDay,FuelType,ModelYear,SeatingCapacity,Vimage1,Vimage2,Vimage3,Vimage4,Vimage5,AirConditioner,PowerDoorLocks,AntiLockBrakingSystem,BrakeAssist,PowerSteering,DriverAirbag,PassengerAirbag,PowerWindows,CDPlayer,CentralLocking,CrashSensor,LeatherSeats) VALUES(:vehicletitle,:brand,:vehicleoverview,:priceperday,:fueltype,:modelyear,:seatingcapacity,:vimage1,:vimage2,:vimage3,:vimage4,:vimage5,:airconditioner,:powerdoorlocks,:antilockbrakingsys,:brakeassist,:powersteering,:driverairbag,:passengerairbag,:powerwindow,:cdplayer,:centrallocking,:crashcensor,:leatherseats)";
+$sql="INSERT INTO tblrooms(RoomsTitle,RoomsTyperoom,RoomsOverview,PricePerDay,ColorType,NumberBed,NumberPeople,Vimage1,Vimage2,Vimage3,Vimage4,Vimage5,AirConditioner,PowerDoorLocks,AntiLockBrakingSystem,BrakeAssist,PowerSteering,DriverAirbag,PassengerAirbag,PowerWindows,CDPlayer,CentralLocking,CrashSensor,LeatherSeats) VALUES(:roomtitle,:typeroom,:roomoverview,:priceperday,:colortype,:numberbed,:numberpeople,:vimage1,:vimage2,:vimage3,:vimage4,:vimage5,:airconditioner,:powerdoorlocks,:antilockbrakingsys,:brakeassist,:powersteering,:driverairbag,:passengerairbag,:powerwindow,:cdplayer,:centrallocking,:crashcensor,:leatherseats)";
 $query = $dbh->prepare($sql);
-$query->bindParam(':vehicletitle',$vehicletitle,PDO::PARAM_STR);
-$query->bindParam(':brand',$brand,PDO::PARAM_STR);
-$query->bindParam(':vehicleoverview',$vehicleoverview,PDO::PARAM_STR);
+$query->bindParam(':roomtitle',$roomtitle,PDO::PARAM_STR);
+$query->bindParam(':typeroom',$typeroom,PDO::PARAM_STR);
+$query->bindParam(':roomoverview',$roomoverview,PDO::PARAM_STR);
 $query->bindParam(':priceperday',$priceperday,PDO::PARAM_STR);
-$query->bindParam(':fueltype',$fueltype,PDO::PARAM_STR);
-$query->bindParam(':modelyear',$modelyear,PDO::PARAM_STR);
-$query->bindParam(':seatingcapacity',$seatingcapacity,PDO::PARAM_STR);
+$query->bindParam(':colortype',$colortype,PDO::PARAM_STR);
+$query->bindParam(':numberbed',$numberbed,PDO::PARAM_STR);
+$query->bindParam(':numberpeople',$numberpeople,PDO::PARAM_STR);
 $query->bindParam(':vimage1',$vimage1,PDO::PARAM_STR);
 $query->bindParam(':vimage2',$vimage2,PDO::PARAM_STR);
 $query->bindParam(':vimage3',$vimage3,PDO::PARAM_STR);
@@ -70,7 +70,7 @@ $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-$msg="Vehicle posted successfully";
+$msg="Room posted successfully";
 }
 else 
 {
@@ -141,7 +141,7 @@ $error="Something went wrong. Please try again";
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Post A Vehicle</h2>
+						<h2 class="page-title">Post A Room</h2>
 
 						<div class="row">
 							<div class="col-md-12">
@@ -155,13 +155,13 @@ $error="Something went wrong. Please try again";
 <div class="form-group">
 <label class="col-sm-2 control-label">Tên <span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="text" name="vehicletitle" class="form-control" required>
+<input type="text" name="roomtitle" class="form-control" required>
 </div>
 <label class="col-sm-2 control-label">Loại Phòng<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<select class="selectpicker" name="brandname" required>
+<select class="selectpicker" name="typeroomname" required>
 <option value=""> Chọn </option>
-<?php $ret="select id,BrandName from tblbrands";
+<?php $ret="select id,TyperoomName from tbltyperooms";
 $query= $dbh -> prepare($ret);
 //$query->bindParam(':id',$id, PDO::PARAM_STR);
 $query-> execute();
@@ -171,7 +171,7 @@ if($query -> rowCount() > 0)
 foreach($results as $result)
 {
 ?>
-<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?></option>
+<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->TyperoomName);?></option>
 <?php }} ?>
 
 </select>
@@ -182,7 +182,7 @@ foreach($results as $result)
 <div class="form-group">
 <label class="col-sm-2 control-label">Tổng Quan<span style="color:red">*</span></label>
 <div class="col-sm-10">
-<textarea class="form-control" name="vehicalorcview" rows="3" required></textarea>
+<textarea class="form-control" name="roomorcview" rows="3" required></textarea>
 </div>
 </div>
 
@@ -191,27 +191,27 @@ foreach($results as $result)
 <div class="col-sm-4">
 <input type="text" name="priceperday" class="form-control" required>
 </div>
-<label class="col-sm-2 control-label">Select Fuel Type<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Màu Sắc<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<select class="selectpicker" name="fueltype" required>
+<select class="selectpicker" name="colortype" required>
 <option value=""> Select </option>
 
-<option value="Petrol">Petrol</option>
-<option value="Diesel">Diesel</option>
-<option value="CNG">CNG</option>
+<option value="Tươi sáng">Tươi Sáng</option>
+<option value="Trung Tính">Trung Tính</option>
+<option value="Tối">Tối</option>
 </select>
 </div>
 </div>
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Model Year<span style="color:red">*</span></label>
-<div class="col-sm-4">
-<input type="text" name="modelyear" class="form-control" required>
-</div>
 <label class="col-sm-2 control-label">Số Giường<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="text" name="seatingcapacity" class="form-control" required>
+<input type="text" name="numberbed" class="form-control" required>
+</div>
+<label class="col-sm-2 control-label">Số người tối đa<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="numberpeople" class="form-control" required>
 </div>
 </div>
 <div class="hr-dashed"></div>
@@ -264,22 +264,22 @@ foreach($results as $result)
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="airconditioner" name="airconditioner" value="1">
-<label for="airconditioner"> Air Conditioner </label>
+<label for="airconditioner"> Máy lạnh </label>
 </div>
 </div>
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="powerdoorlocks" name="powerdoorlocks" value="1">
-<label for="powerdoorlocks"> Power Door Locks </label>
+<label for="powerdoorlocks"> Máy Quạt </label>
 </div></div>
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="antilockbrakingsys" name="antilockbrakingsys" value="1">
-<label for="antilockbrakingsys"> AntiLock Braking System </label>
+<label for="antilockbrakingsys"> Wifi Miễn Phí </label>
 </div></div>
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="brakeassist" name="brakeassist" value="1">
-<label for="brakeassist"> Brake Assist </label>
+<label for="brakeassist"> Bể bơi </label>
 </div>
 </div>
 
@@ -290,23 +290,23 @@ foreach($results as $result)
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="powersteering" name="powersteering" value="1">
 <input type="checkbox" id="powersteering" name="powersteering" value="1">
-<label for="inlineCheckbox5"> Power Steering </label>
+<label for="inlineCheckbox5"> Lò sưởi </label>
 </div>
 </div>
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="driverairbag" name="driverairbag" value="1">
-<label for="driverairbag">Driver Airbag</label>
+<label for="driverairbag">Cà Phê Miễn Phí</label>
 </div>
 </div>
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="passengerairbag" name="passengerairbag" value="1">
-<label for="passengerairbag"> Passenger Airbag </label>
+<label for="passengerairbag"> Nhà hàng và quầy bar </label>
 </div></div>
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="powerwindow" name="powerwindow" value="1">
-<label for="powerwindow"> Power Windows </label>
+<label for="powerwindow"> TV </label>
 </div>
 </div>
 
@@ -315,23 +315,23 @@ foreach($results as $result)
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="cdplayer" name="cdplayer" value="1">
-<label for="cdplayer"> CD Player </label>
+<label for="cdplayer"> Tủ lạnh </label>
 </div>
 </div>
 <div class="col-sm-3">
 <div class="checkbox h checkbox-inline">
 <input type="checkbox" id="centrallocking" name="centrallocking" value="1">
-<label for="centrallocking">Central Locking</label>
+<label for="centrallocking">Dịch vụ phòng hàng ngày</label>
 </div></div>
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="crashcensor" name="crashcensor" value="1">
-<label for="crashcensor"> Crash Sensor </label>
+<label for="crashcensor"> Phòng Gym </label>
 </div></div>
 <div class="col-sm-3">
 <div class="checkbox checkbox-inline">
 <input type="checkbox" id="leatherseats" name="leatherseats" value="1">
-<label for="leatherseats"> Leather Seats </label>
+<label for="leatherseats"> Tủ an toàn </label>
 </div>
 </div>
 </div>
